@@ -219,16 +219,16 @@ function MainApp() {
 
                         <h3>Stripe height</h3>
                         <div style={{ display: "flex", justifyContent: "center" }}>
-                            <InputNumber max={maxStripeHeight} value={minStripeHeight} onValueChange={(e) => setMinStripeHeight(e.value as number)}/>
+                            <InputNumber className={styles.myInput} max={maxStripeHeight} value={minStripeHeight} onValueChange={(e) => setMinStripeHeight(e.value as number)}/>
                             <span style={{ fontSize: "30px", padding: "0 10px 0 10px" }}>to</span>
-                            <InputNumber min={minStripeHeight} value={maxStripeHeight} onValueChange={(e) => setMaxStripeHeight(e.value as number)}/>
+                            <InputNumber className={styles.myInput} min={minStripeHeight} value={maxStripeHeight} onValueChange={(e) => setMaxStripeHeight(e.value as number)}/>
                         </div>
                         <h3>Stripe shift</h3>
 
                         <div style={{ display: "flex", justifyContent: "center" }}>
-                            <InputNumber max={maxStripeShift} value={minStripeShift} onValueChange={(e) => setMinStripeShift(e.value as number)} />
+                            <InputNumber className={styles.myInput} max={maxStripeShift} value={minStripeShift} onValueChange={(e) => setMinStripeShift(e.value as number)} />
                             <span style={{ fontSize: "30px", padding: "0 10px 0 10px" }}>to</span>
-                            <InputNumber min={minStripeShift} value={maxStripeShift} onValueChange={(e) => setMaxStripeShift(e.value as number) } />
+                            <InputNumber className={styles.myInput} min={minStripeShift} value={maxStripeShift} onValueChange={(e) => setMaxStripeShift(e.value as number) } />
                         </div>
                         <h3 style={{ marginBottom: 0 }}>Rotation</h3>
                         <div style={{ display: "inline-flex", width: "100%", justifyContent: "space-around" }}>

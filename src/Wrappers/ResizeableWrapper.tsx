@@ -9,7 +9,7 @@ const ResizableWrapper = ({ children }: { children?: React.ReactNode }) => {
     },
     rightPane: {
       width: 30,
-      minWidth: 30,
+      minWidth: 18,
       maxWidth: 70
     },
   });

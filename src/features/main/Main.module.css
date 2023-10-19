@@ -49,7 +49,9 @@
 
 
 
-
+.myInput > [class~="p-inputnumber-input"] {
+  width: 80%;
+}
 
 
 
