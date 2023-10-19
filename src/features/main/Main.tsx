@@ -25,11 +25,11 @@ function MainApp() {
     const [verticalRotate, setVerticalRotate] = useState<boolean>(false);
     const [horizontalRotate, setHorizontalRotate] = useState<boolean>(false);
 
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
     useEffect(() => {
         const handleResize = () => {
-        setIsMobile(window.innerWidth < 768);
+        setIsMobile(window.innerWidth < 1024);
         };
 
         window.addEventListener('resize', handleResize);
@@ -231,7 +231,7 @@ function MainApp() {
 
 
     const content = [
-    <Grid item md={6} xs={12} {...getRootProps()} className={styles.dropzone}>
+    <Grid item md={6} xs={12} {...getRootProps()} className={styles.dropzone} style={{height: isMobile ? "auto" : "90vh"}}>
         <input {...getInputProps()} />
         {image == undefined && <p>Drag & drop an image here, or click to select an image</p>}
 
@@ -242,7 +242,7 @@ function MainApp() {
             className={styles.canvas}
         />
     </Grid>,
-    <Grid md={6} xs={12} item style={{ backgroundColor: "#373F51", width: "100%", height: "90vh", color: "#A9BCD0", }}>
+    <Grid md={6} xs={12} item style={{ backgroundColor: "#373F51", width: "100%", height: isMobile ? "auto" : "90vh", color: "#A9BCD0", }}>
         <div style={{ margin: "auto", textAlign: "center" }}>
 
             <h2>Settings</h2>
