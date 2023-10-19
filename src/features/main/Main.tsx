@@ -9,6 +9,7 @@ import { getRandomInt, getRandomBoolean } from '../../utils/randomProvider';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { AiFillGithub } from 'react-icons/ai';
+import { func } from 'prop-types';
 
 
 
@@ -23,6 +24,23 @@ function MainApp() {
     const [maxStripeShift, setMaxStripeShift] = useState<number>(30);
     const [verticalRotate, setVerticalRotate] = useState<boolean>(false);
     const [horizontalRotate, setHorizontalRotate] = useState<boolean>(false);
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+        setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+        window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+
+
 
     const handleDownloadClick = () => {
         if (canvas != undefined) {
@@ -160,6 +178,25 @@ function MainApp() {
             DrawImage(image, canvas)
         }
     }
+
+
+    function addWrapper(content: JSX.Element[]):JSX.Element{
+        console.log("is mobile: ", isMobile)
+        if(isMobile){
+            return (<Grid container>
+                {content[0]}
+                {content[1]}
+            </Grid>)
+        }
+        else{
+            return(<ResizableLayout>
+                {content}
+            </ResizableLayout>)
+        }
+    }
+
+
+
     useEffect(() => {
         reDrawImage()
     }, [minStripeHeight, maxStripeHeight, minStripeShift, maxStripeShift, verticalRotate, horizontalRotate])
@@ -192,69 +229,70 @@ function MainApp() {
 
     console.log("max shift: ", maxStripeShift)
 
+
+    const content = [
+    <Grid item md={6} xs={12} {...getRootProps()} className={styles.dropzone}>
+        <input {...getInputProps()} />
+        {image == undefined && <p>Drag & drop an image here, or click to select an image</p>}
+
+        <canvas
+            ref={(ref: HTMLCanvasElement) => setCanvas(ref)}
+            width={600} // Adjust canvas width as needed
+            height={600} // Adjust canvas height as needed
+            className={styles.canvas}
+        />
+    </Grid>,
+    <Grid md={6} xs={12} item style={{ backgroundColor: "#373F51", width: "100%", height: "90vh", color: "#A9BCD0", }}>
+        <div style={{ margin: "auto", textAlign: "center" }}>
+
+            <h2>Settings</h2>
+
+            <h3>Stripe height</h3>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+                <InputNumber className={styles.myInput} max={maxStripeHeight} value={minStripeHeight} onValueChange={(e) => setMinStripeHeight(e.value as number)}/>
+                <span style={{ fontSize: "30px", padding: "0 10px 0 10px" }}>to</span>
+                <InputNumber className={styles.myInput} min={minStripeHeight} value={maxStripeHeight} onValueChange={(e) => setMaxStripeHeight(e.value as number)}/>
+            </div>
+            <h3>Stripe shift</h3>
+
+            <div style={{ display: "flex", justifyContent: "center" }}>
+                <InputNumber className={styles.myInput} max={maxStripeShift} value={minStripeShift} onValueChange={(e) => setMinStripeShift(e.value as number)} />
+                <span style={{ fontSize: "30px", padding: "0 10px 0 10px" }}>to</span>
+                <InputNumber className={styles.myInput} min={minStripeShift} value={maxStripeShift} onValueChange={(e) => setMaxStripeShift(e.value as number) } />
+            </div>
+            <h3 style={{ marginBottom: 0 }}>Rotation</h3>
+            <div style={{ display: "inline-flex", width: "100%", justifyContent: "space-around" }}>
+                <div>
+                    <h4>Horizontal</h4>
+                    <ToggleButton checked={horizontalRotate} onChange={(e) => setHorizontalRotate(e.value)} className="w-8rem" />
+                </div>
+                <div>
+                    <h4>Vertical</h4>
+                    <ToggleButton checked={verticalRotate} onChange={(e) => setVerticalRotate(e.value)} className="w-8rem" />
+                </div>
+            </div>
+            <div style={{ display: "inline-flex", width: "100%", justifyContent: "space-around" }}>
+                <Button label="Regenerate" onClick={reDrawImage} style={{ margin: "20px 0 20px 0" }} />
+
+                <Button label="Download image" onClick={handleDownloadClick} style={{ margin: "20px 0 20px 0" }} />
+            </div>
+            <Card style={{ margin: "20px" }}>
+                Hello, this application was created at BUT FIT as a project for art informatics.
+                Since I was mostly dissatisfied with the tools and was creating my own python scripts,
+                I figured why not try to convert it to web form. I hope you like the application. 
+                You can resize windows and upload new photo over actual.
+            </Card>
+        </div>
+    </Grid>
+    ]
     return (
         <div>
             <nav className={styles.navigation}>
                 <h1>ArtShift</h1>
                 <a href="https://github.com/sestakp/ArtShift" target='_blank'><AiFillGithub /></a>
             </nav>
-
-
-            <ResizableLayout>
-                <div {...getRootProps()} className={styles.dropzone}>
-                    <input {...getInputProps()} />
-                    {image == undefined && <p>Drag & drop an image here, or click to select an image</p>}
-
-                    <canvas
-                        ref={(ref: HTMLCanvasElement) => setCanvas(ref)}
-                        width={600} // Adjust canvas width as needed
-                        height={600} // Adjust canvas height as needed
-                        className={styles.canvas}
-                    />
-                </div>
-                <div style={{ backgroundColor: "#373F51", width: "100%", height: "100vh", color: "#A9BCD0", }}>
-                    <div style={{ margin: "auto", textAlign: "center" }}>
-
-                        <h2>Settings</h2>
-
-                        <h3>Stripe height</h3>
-                        <div style={{ display: "flex", justifyContent: "center" }}>
-                            <InputNumber className={styles.myInput} max={maxStripeHeight} value={minStripeHeight} onValueChange={(e) => setMinStripeHeight(e.value as number)}/>
-                            <span style={{ fontSize: "30px", padding: "0 10px 0 10px" }}>to</span>
-                            <InputNumber className={styles.myInput} min={minStripeHeight} value={maxStripeHeight} onValueChange={(e) => setMaxStripeHeight(e.value as number)}/>
-                        </div>
-                        <h3>Stripe shift</h3>
-
-                        <div style={{ display: "flex", justifyContent: "center" }}>
-                            <InputNumber className={styles.myInput} max={maxStripeShift} value={minStripeShift} onValueChange={(e) => setMinStripeShift(e.value as number)} />
-                            <span style={{ fontSize: "30px", padding: "0 10px 0 10px" }}>to</span>
-                            <InputNumber className={styles.myInput} min={minStripeShift} value={maxStripeShift} onValueChange={(e) => setMaxStripeShift(e.value as number) } />
-                        </div>
-                        <h3 style={{ marginBottom: 0 }}>Rotation</h3>
-                        <div style={{ display: "inline-flex", width: "100%", justifyContent: "space-around" }}>
-                            <div>
-                                <h4>Horizontal</h4>
-                                <ToggleButton checked={horizontalRotate} onChange={(e) => setHorizontalRotate(e.value)} className="w-8rem" />
-                            </div>
-                            <div>
-                                <h4>Vertical</h4>
-                                <ToggleButton checked={verticalRotate} onChange={(e) => setVerticalRotate(e.value)} className="w-8rem" />
-                            </div>
-                        </div>
-                        <div style={{ display: "inline-flex", width: "100%", justifyContent: "space-around" }}>
-                            <Button label="Regenerate" onClick={reDrawImage} style={{ margin: "20px 0 20px 0" }} />
-
-                            <Button label="Download image" onClick={handleDownloadClick} style={{ margin: "20px 0 20px 0" }} />
-                        </div>
-                        <Card style={{ margin: "20px" }}>
-                            Hello, this application was created at BUT FIT as a project for art informatics.
-                            Since I was mostly dissatisfied with the tools and was creating my own python scripts,
-                            I figured why not try to convert it to web form. I hope you like the application. 
-                            You can resize windows and upload new photo over actual.
-                        </Card>
-                    </div>
-                </div>
-            </ResizableLayout>
+            
+            {addWrapper(content)}
 
 
 

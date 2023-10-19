@@ -14,7 +14,7 @@
     padding: 20px;
     text-align: center;
     cursor: pointer;
-    height: 100vh;
+    height: 90vh;
     margin: 20px;
   }
 
@@ -27,7 +27,7 @@
 
 
 .navigation{
-    height: 80px;
+    height: 10vh;
     background-color: #58A4B0;
     display: flex;
     align-items: center;
