@@ -3,13 +3,13 @@ import styles from "./ResizeableWrapper.module.css"
 const ResizableWrapper = ({ children }: { children?: React.ReactNode }) => {
   const [layout, setLayout] = useState({
     leftPane: {
-      width: 70,
+      width: 87,
       minWidth: 5,
       maxWidth: undefined,
     },
     rightPane: {
-      width: 30,
-      minWidth: 18,
+      width: 13,
+      minWidth: 13,//18,
       maxWidth: 70
     },
   });
@@ -64,7 +64,6 @@ const ResizableWrapper = ({ children }: { children?: React.ReactNode }) => {
     }
   };
 
-  console.log(layout.leftPane.width)
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);

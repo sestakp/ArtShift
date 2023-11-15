@@ -7,7 +7,7 @@ import './index.css';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-
+console.warn = () => {};
 root.render(
   <React.StrictMode>
       <App />
