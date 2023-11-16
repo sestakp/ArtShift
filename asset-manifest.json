@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/ArtShift/static/css/main.bfaee770.css",
+    "main.js": "/ArtShift/static/js/main.14a6921e.js",
+    "static/js/787.7b7a1e6d.chunk.js": "/ArtShift/static/js/787.7b7a1e6d.chunk.js",
+    "static/media/Inter-italic.var.woff2?v=3.19": "/ArtShift/static/media/Inter-italic.var.30807be7abc48ba8c73c.woff2",
+    "static/media/Inter-roman.var.woff2?v=3.19": "/ArtShift/static/media/Inter-roman.var.ba4caefcdf5b36b438db.woff2",
+    "static/media/Montserrat-Bold.ttf": "/ArtShift/static/media/Montserrat-Bold.50f0257aa1e905f4bfaf.ttf",
+    "static/media/Montserrat-Regular.ttf": "/ArtShift/static/media/Montserrat-Regular.24785cc015b27a3e964b.ttf",
+    "index.html": "/ArtShift/index.html",
+    "main.bfaee770.css.map": "/ArtShift/static/css/main.bfaee770.css.map",
+    "main.14a6921e.js.map": "/ArtShift/static/js/main.14a6921e.js.map",
+    "787.7b7a1e6d.chunk.js.map": "/ArtShift/static/js/787.7b7a1e6d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bfaee770.css",
+    "static/js/main.14a6921e.js"
+  ]
+}

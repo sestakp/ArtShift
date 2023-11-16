@@ -295,10 +295,8 @@ function MainApp() {
                 <Button size="small" label="Randomize" onClick={randomizeParameters} style={{ margin: "40px 0 40px 0" }} />
             </div>
             <Card style={{ margin: "10px", padding: 0 }}>
-                    Hello, this application was created at BUT FIT as a project for art informatics.
-                    Since I was mostly dissatisfied with the tools and was creating my own python scripts,
-                    I figured why not try to convert it to web form. I hope you like the application. 
-                    You can resize windows and upload new photo over actual.
+                This app, born from a BUT FIT art informatics project, transforms my dissatisfaction 
+                with tools into Python scripts. Now, it's a web app. Enjoy! Resize windows and upload new photos seamlessly.
             </Card>
 
             
